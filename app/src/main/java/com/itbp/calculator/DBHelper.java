@@ -13,12 +13,13 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "calculator";
     public static Context context;
 
+    /** Consructu of the DB Helper with parameter Context */
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
         this.context = context;
     }
 
-
+    /* In this method the db table is created */
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {
@@ -35,12 +36,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        /*db.execSQL("DROP TABLE IF EXISTS checks");
-        onCreate(db);*/
+
     }
 
 
-
+    /* Method for executing single SQL query*/
     public boolean executeSQL(String SQL) {
         try {
             SQLiteDatabase db = this.getWritableDatabase();
@@ -52,7 +52,10 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-
+    /**
+     *
+     * Method for retrivieng all rows from the db table
+     */
     public ArrayList<String[]> rawQuery(String SQL) {
         try {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -72,7 +75,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 res.add(data);
                 c.moveToNext();
             }
-
 
             return res;
         }catch (Exception e) {

@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /* instances of the EditText fields */
         A = (EditText) findViewById(R.id.A);
         B = (EditText) findViewById(R.id.B);
         C = (EditText) findViewById(R.id.C);
@@ -31,28 +32,33 @@ public class MainActivity extends AppCompatActivity {
         history = (Button) findViewById(R.id.history);
         db = new DBHelper(this);
         final Context context = this;
+        /* Click listener for the calculate button */
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 try{
 
-
+                    /* Getting the entered values */
                     String text_a=A.getText().toString();
                     String text_b=B.getText().toString();
                     String text_c=C.getText().toString();
 
+                    /** Validation if all fields has value */
                     if(text_a.equals("") || text_b.equals("") || text_c.equals("") ) {
                         result.setText("Не сте въвели необходимите данни! ");
-
                         return;
                     }
+
+                    /** Parsing the values as floats */
                     Float fl_a=Float.parseFloat(text_a);
                     Float fl_b=Float.parseFloat(text_b);
                     Float fl_c=Float.parseFloat(text_c);
 
+                    /* calculating the D */
                     Float D=fl_b*fl_b-4*fl_a*fl_c;
                     String res = "";
+                    /* Showing the result depending on the D and then save the data in the local DB*/
                     if(D<0){
                         res = "Няма реални корени";
                         result.setText(res);
@@ -91,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        /* Click listener for tge history button */
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
